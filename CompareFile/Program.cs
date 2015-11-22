@@ -11,6 +11,7 @@ namespace CompareFile
 
         private static readonly string _pathToDirectory2 = @"C:\dir2\";
 
+        // Using for hashFunction
         private static readonly int _sizeHash = 5;
 
         static void Main(string[] args)
@@ -21,8 +22,9 @@ namespace CompareFile
             var filesDir1 = dir1.GetFiles("*", SearchOption.AllDirectories);
             var filesDir2 = dir2.GetFiles("*", SearchOption.AllDirectories);
 
-            // Key - hash first _sizeHash bytes from file, Value - FileInfo
+            // Key - hash is first _sizeHash bytes from file, Value - FileInfo
             MultiValueDictionary<string, FileInfo> hashDictDir1;
+
             // Key - file name from dir1, Value - equals file's name from dir2
             MultiValueDictionary<string, string> dictFilesDir1;
 
@@ -70,6 +72,9 @@ namespace CompareFile
                     {
                         dictFilesDir1.Add(fileNameToCompare.Name, fileName);
                     }
+
+                    // Offset
+                    fs.Seek(_sizeHash, SeekOrigin.Begin);
                 }
             }
         }
@@ -121,6 +126,8 @@ namespace CompareFile
             }
         }
 
+
+        // Output data
         private static void ProcessingOutputData(MultiValueDictionary<string, string> dataDictionary)
         {
             Console.WriteLine("Equals files:");
