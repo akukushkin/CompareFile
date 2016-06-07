@@ -7,17 +7,16 @@ namespace CompareFile
 {
     class Program
     {
-        private static readonly string _pathToDirectory1 = @"C:\dir1\";
-
-        private static readonly string _pathToDirectory2 = @"C:\dir2\";
+        private const string PathToDirectory1 = @"C:\dir1\";
+        private const string PathToDirectory2 = @"C:\dir2\";
 
         // Using for hashFunction
         private static readonly int _sizeHash = 5;
 
         static void Main(string[] args)
         {
-            var dir1 = new DirectoryInfo(_pathToDirectory1);
-            var dir2 = new DirectoryInfo(_pathToDirectory2);
+            var dir1 = new DirectoryInfo(PathToDirectory1);
+            var dir2 = new DirectoryInfo(PathToDirectory2);
 
             var filesDir1 = dir1.GetFiles("*", SearchOption.AllDirectories);
             var filesDir2 = dir2.GetFiles("*", SearchOption.AllDirectories);
